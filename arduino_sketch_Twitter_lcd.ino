@@ -5,7 +5,7 @@
 
 // 変数の定義
 #define LED_PIN 13
-char buffer[255];
+char buffer[422];
 //ア=0x1b
 int inputdegit = 0;
 
