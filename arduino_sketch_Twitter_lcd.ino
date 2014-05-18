@@ -5,17 +5,15 @@
 
 // 変数の定義
 #define LED_PIN 13
-short cnt = -1;
 char buffer[255];
 //ア=0x1b
-char inputchar = 0;
+int inputdegit = 0;
 
 // 使用するピンの定義(RS,R/W,Enable,DB4,DB5,DB6,DB7)
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12, 13);
  
 // 初期化
 void setup(){
-  pinMode(LED_PIN, OUTPUT);
  
   // シリアルポートを9600 bps[ビット/秒]で初期化
   Serial.begin(9600);
@@ -44,28 +42,8 @@ void loop(){
   //inputchar = Serial.read();
   Serial.readBytesUntil('\0', buffer, 254);
   
-  if(inputchar != buffer[0] ){
-    // 読み込んだデータが -1 以外の場合　以下の処理を行う
-    inputchar = buffer[0];
- 
-    switch(inputchar){
-      case 'o':
-        // 読み込みデータが　o の場合
- 
-        Serial.print("LED ON\n");
-        digitalWrite(LED_PIN, HIGH);
-        break;
-      case 'p': 
-        // 読み込みデータが　p の場合
- 
-        Serial.print("LED OFF\n");
-        digitalWrite(LED_PIN, LOW);
-        break;
-      default:
-          //buffer = inputchar;
-          cnt = 15;
-        break;
-    }
+  if(inputdegit != (buffer[0]+buffer[1]) ){
+    inputdegit = (buffer[0]+buffer[1]);
   } else {
     i=0;
     while(i<255){
