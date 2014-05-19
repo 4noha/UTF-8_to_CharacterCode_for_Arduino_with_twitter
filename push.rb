@@ -70,7 +70,7 @@ str2.split("").each do |c|
     str += (c_ord/2-5996).chr.b
   elsif(c == "ー")
     str += (c_ord/2-6094).chr.b
-  else
+  elsif(c >= "A" && c <= "z")
     str += c.b
   end
   str += 0xde.chr.b if daku
